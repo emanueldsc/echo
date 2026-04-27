@@ -1,0 +1,50 @@
+<section class="vote-grid" aria-label="Baralho de estimativas">
+	<header class="state-row">
+		@if (submittedVote() !== null) {
+			<p class="state submitted">Voto enviado com sucesso.</p>
+		} @else if (!canVote()) {
+			<p class="state locked">Votacao bloqueada no momento.</p>
+		} @else {
+			<p class="state">Escolha sua carta e confirme.</p>
+		}
+	</header>
+
+	<div class="cards" role="list">
+		@for (card of deck(); track card) {
+			<button
+				type="button"
+				class="card"
+				role="listitem"
+				[disabled]="isLocked()"
+				[class.card-selected]="selectedVote() === card"
+				[class.card-submitted]="submittedVote() === card"
+				[class.card-revealed]="isRevealed()"
+				(click)="selectCard(card)"
+			>
+				<span>{{ card }}</span>
+			</button>
+		}
+	</div>
+
+	<div class="actions">
+		<button
+			type="button"
+			class="ghost"
+			[disabled]="selectedVote() === null || submittedVote() !== null"
+			(click)="clearSelection()"
+		>
+			Limpar
+		</button>
+
+		<button
+			type="button"
+			class="primary"
+			[disabled]="selectedVote() === null || isLocked()"
+			(click)="submitVote()"
+		>
+			Confirmar voto
+		</button>
+
+		<button type="button" class="ghost" (click)="resetVote()">Reset local</button>
+	</div>
+</section>

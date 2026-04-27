@@ -1,0 +1,134 @@
+<main class="room-page">
+	<header class="room-header">
+		<div class="brand-row">
+			<p class="eyebrow">ECHO</p>
+			<h1>Sala <span class="code">{{ roomCode() }}</span></h1>
+			<span
+				class="status"
+				[class.status-waiting]="roundStatus() === 'waiting'"
+				[class.status-voting]="roundStatus() === 'voting'"
+				[class.status-revealed]="roundStatus() === 'revealed'"
+			>{{ statusLabel() }}</span>
+		</div>
+
+		<div class="header-actions">
+			@if (currentUserName()) {
+				<div class="current-user" aria-label="Usuario ativo nesta aba">
+					<span class="current-user-avatar" aria-hidden="true">{{ currentUserInitials() }}</span>
+					<span class="current-user-name">{{ currentUserName() }}</span>
+				</div>
+			}
+			<button type="button" class="ghost" (click)="copyRoomCode()" aria-label="Copiar codigo da sala">
+				<span class="material-icons" aria-hidden="true">content_copy</span>
+				{{ roomCode() }}
+			</button>
+			<button type="button" class="danger" (click)="leaveRoom()" aria-label="Sair da sala">
+				<span class="material-icons" aria-hidden="true">logout</span>
+				Sair
+			</button>
+			@if (copied()) {
+				<p class="copied-feedback" role="status">Copiado!</p>
+			}
+		</div>
+	</header>
+
+	<section class="item-panel" aria-label="Controle da rodada">
+		<div class="connection-bar">
+			<p
+				class="connection-state"
+				[class.connection-warning]="hasConnectionIssue() && !hasServerError()"
+				[class.connection-error]="hasServerError()"
+				role="status"
+			>{{ connectionLabel() }}@if (statusMessage()) {<span class="connection-detail" [class.connection-error]="hasServerError()"> · {{ statusMessage() }}</span>}</p>
+			@if (canRetryConnection()) {
+				<button type="button" class="ghost small" (click)="retryConnection()">Reconectar</button>
+			}
+		</div>
+
+		<div class="item-row">
+			<form [formGroup]="itemForm" class="item-form">
+				<input
+					formControlName="item"
+					type="text"
+					[placeholder]="canEditRoundTitle() ? 'Digite o titulo da rodada' : 'Titulo bloqueado durante a rodada'"
+					[attr.aria-label]="canEditRoundTitle() ? 'Titulo da rodada' : 'Titulo da rodada (somente leitura)'"
+					[attr.aria-readonly]="!canEditRoundTitle() || null"
+				/>
+			</form>
+			<p class="round-meta">Rodada {{ roundNumber() }} · {{ votedParticipantsCount() }}/{{ onlineParticipantsCount() }} votos</p>
+		</div>
+	</section>
+
+	<section class="layout" aria-label="Painel da sessao">
+		<article class="card">
+			<h2>Participantes</h2>
+			<app-participant-list
+				[participants]="participants()"
+				[isRevealed]="roundStatus() === 'revealed'"
+				[roundNumber]="roundNumber()"
+				[currentUserId]="currentUserId()"
+			/>
+		</article>
+
+		<article class="card">
+			<h2>Cartas de voto</h2>
+			<app-vote-card-grid
+				[isRevealed]="roundStatus() === 'revealed'"
+				[canVote]="canCurrentUserVote()"
+				(voteSubmitted)="handleVoteSubmitted($event)"
+			/>
+		</article>
+
+		<article class="card">
+			<h2>Controles da rodada</h2>
+			<app-round-controls
+				[status]="roundStatus()"
+				[totalParticipants]="onlineParticipantsCount()"
+				[votedParticipants]="votedParticipantsCount()"
+				[isModerator]="isCurrentUserModerator()"
+				[roundTitleReady]="canStartRound()"
+				(startRound)="startRound()"
+				(revealVotes)="revealVotes()"
+				(resetRound)="resetRound()"
+				(nextItem)="goToNextItem()"
+			/>
+		</article>
+
+		<article class="card">
+			<h2>Resumo da rodada</h2>
+			<app-vote-summary
+				[isRevealed]="roundStatus() === 'revealed'"
+				[votes]="voteResults()"
+			/>
+		</article>
+
+		<article class="card">
+			<h2>Historico</h2>
+			@if (roundHistory().length === 0) {
+				<p class="history-empty">Nenhuma rodada concluida ainda.</p>
+			} @else {
+				<ul class="history-list" role="list">
+					@for (entry of roundHistory(); track entry.roundNumber) {
+						<li class="history-item">
+							<div class="history-header">
+								<span class="history-round">#{{ entry.roundNumber }}</span>
+								<span class="history-title">{{ entry.itemTitle }}</span>
+								@if (entry.average !== null) {
+									<span class="history-avg">Media: {{ entry.average }}</span>
+								}
+							</div>
+							<ul class="history-votes" role="list">
+								@for (vote of entry.votes; track vote.participantName) {
+									<li class="history-vote-chip">
+										<span class="history-vote-name">{{ vote.participantName }}</span>
+										<span class="history-vote-val">{{ vote.value ?? '-' }}</span>
+									</li>
+								}
+							</ul>
+						</li>
+					}
+				</ul>
+			}
+		</article>
+	</section>
+</main>

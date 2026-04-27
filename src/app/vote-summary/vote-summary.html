@@ -1,0 +1,53 @@
+<section class="vote-summary" aria-label="Resumo dos votos">
+	@if (!isRevealed()) {
+		<p class="hidden-state">Os votos ainda estao ocultos.</p>
+	} @else if (results().length === 0) {
+		<p class="hidden-state">Ainda nao ha votos para mostrar nesta rodada.</p>
+	} @else {
+		<header class="metrics">
+			<p><strong>{{ results().length }}</strong> votos</p>
+
+			@if (average() !== null) {
+				<p><strong>Media:</strong> {{ average() }}</p>
+			}
+
+			@if (median() !== null) {
+				<p><strong>Mediana:</strong> {{ median() }}</p>
+			}
+
+			@if (consensusVote() !== null) {
+				<p><strong>Consenso:</strong> {{ consensusVote() }}</p>
+			}
+		</header>
+
+		@if (hasHighDivergence()) {
+			<p class="warning" role="status">Alta divergencia detectada: vale discutir os extremos.</p>
+		}
+
+		<div class="layout">
+			<article class="panel">
+				<h3>Distribuicao</h3>
+				<ul class="distribution" role="list">
+					@for (item of distribution(); track item.value) {
+						<li class="distribution-item" role="listitem">
+							<span class="value">{{ item.value }}</span>
+							<span class="count">{{ item.count }} voto(s)</span>
+						</li>
+					}
+				</ul>
+			</article>
+
+			<article class="panel">
+				<h3>Votos por pessoa</h3>
+				<ul class="by-user" role="list">
+					@for (result of results(); track result.participantId) {
+						<li class="by-user-item" role="listitem">
+							<span class="name">{{ result.participantName }}</span>
+							<span class="user-vote">{{ result.value }}</span>
+						</li>
+					}
+				</ul>
+			</article>
+		</div>
+	}
+</section>

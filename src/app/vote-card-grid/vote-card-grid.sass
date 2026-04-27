@@ -1,0 +1,85 @@
+:host
+	display: block
+
+.vote-grid
+	display: grid
+	gap: .85rem
+
+.state-row
+	min-height: 1.4rem
+
+.state
+	margin: 0
+	font-size: .9rem
+	color: var(--echo-text-muted)
+
+.state.submitted
+	color: var(--echo-green)
+	font-weight: 700
+
+.state.locked
+	color: #8a6115
+	font-weight: 700
+
+.cards
+	display: grid
+	grid-template-columns: repeat(5, minmax(2.8rem, 1fr))
+	gap: .5rem
+
+.card
+	border: 1px solid var(--echo-border)
+	border-radius: .7rem
+	background: var(--echo-surface)
+	color: var(--echo-text)
+	height: 3rem
+	font-weight: 800
+	cursor: pointer
+	transition: transform .15s ease, border-color .15s ease, background .15s ease
+
+.card:hover:not(:disabled)
+	transform: translateY(-2px)
+	border-color: var(--echo-yellow)
+
+.card-selected
+	border-color: var(--echo-yellow)
+	background: var(--echo-yellow-soft)
+
+.card-submitted
+	border-color: var(--echo-blue)
+	background: var(--echo-blue-soft)
+
+.card-revealed
+	box-shadow: 0 0 0 2px #bdd2ea inset
+
+.card:disabled
+	opacity: .6
+	cursor: not-allowed
+
+.actions
+	display: flex
+	flex-wrap: wrap
+	gap: .55rem
+
+button
+	border: 0
+	border-radius: .65rem
+	height: 2.45rem
+	padding: 0 .9rem
+	font-weight: 700
+	cursor: pointer
+
+button.primary
+	background: var(--echo-green)
+	color: #edf7f1
+
+button.ghost
+	background: var(--echo-blue-soft)
+	color: var(--echo-text)
+
+button:disabled
+	opacity: .5
+	cursor: not-allowed
+
+@media (max-width: 640px)
+	.cards
+		grid-template-columns: repeat(4, minmax(2.8rem, 1fr))

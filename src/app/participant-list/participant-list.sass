@@ -1,0 +1,210 @@
+:host
+	display: block
+
+.participant-list
+	display: grid
+	gap: .8rem
+
+.summary
+	display: flex
+	gap: .4rem
+	flex-wrap: wrap
+
+.summary p
+	margin: 0
+	background: var(--echo-blue-soft)
+	border: 1px solid #c9d9eb
+	border-radius: 999px
+	padding: .28rem .55rem
+	font-size: .85rem
+	color: var(--echo-text)
+
+.list
+	margin: 0
+	padding: 0
+	list-style: none
+	display: grid
+	gap: .65rem
+	grid-template-columns: repeat(auto-fit, minmax(210px, 1fr))
+
+
+.tile
+	perspective: 900px
+	min-height: 134px
+
+.tile-inner
+	position: relative
+	width: 100%
+	height: 100%
+	transform-style: preserve-3d
+	transition: transform .42s ease
+
+
+.tile-back-visible .tile-inner
+	transform: rotateY(180deg)
+
+.tile-reveal-spin.tile-back-visible .tile-inner
+	animation: reveal-single-turn .42s ease
+
+.tile-next-item-spin:not(.tile-back-visible) .tile-inner
+	animation: next-item-single-turn .42s ease
+
+.tile-face
+	position: absolute
+	inset: 0
+	backface-visibility: hidden
+	border-radius: 14px
+
+.tile-front
+	display: grid
+	grid-template-columns: auto 1fr auto
+	align-items: center
+	gap: .6rem
+	border: 1px solid var(--echo-border)
+	background: var(--echo-surface)
+	padding: .65rem
+
+.tile-back
+	display: grid
+	place-content: center
+	gap: .18rem
+	text-align: center
+	transform: rotateY(180deg)
+	border: 1px solid #d1dfe8
+	background: linear-gradient(145deg, var(--echo-yellow-soft) 0%, #f9efcb 100%)
+	padding: .65rem
+
+.tile-voted:not(.tile-revealed) .tile-back
+	border-color: #9dbddd
+	background: linear-gradient(145deg, var(--echo-blue-soft) 0%, #dce9f7 100%)
+
+.tile-offline
+	opacity: .7
+
+.tile-me .tile-front
+	border-color: #c6d9b9
+	box-shadow: 0 0 0 2px #e7f2e2 inset
+
+.tile-me .tile-back
+	border-color: #c7dcb5
+
+.name-me
+	font-size: .78rem
+	font-weight: 600
+	color: var(--echo-green)
+	margin-left: .3rem
+
+.avatar
+	width: 2.2rem
+	height: 2.2rem
+	border-radius: 50%
+	display: grid
+	place-items: center
+	font-size: .76rem
+	font-weight: 800
+	color: var(--echo-text)
+	background: linear-gradient(135deg, #dceccc 0%, #dce8f9 100%)
+
+.meta
+	min-width: 0
+
+.name
+	margin: 0
+	font-weight: 700
+	color: var(--echo-text)
+
+.role
+	margin: 0
+	font-size: .8rem
+	color: var(--echo-text-muted)
+
+.role-moderator
+	color: var(--echo-green)
+	font-weight: 700
+
+.badges
+	display: grid
+	justify-items: end
+	gap: .28rem
+
+.badge
+	font-size: .73rem
+	border-radius: 999px
+	padding: .16rem .48rem
+	color: var(--echo-text-muted)
+	background: #eff4f9
+	border: 1px solid #d2dce7
+
+.badge-online
+	background: var(--echo-green-soft)
+	border-color: #bad8c5
+	color: var(--echo-green)
+
+.badge-voted
+	background: var(--echo-blue-soft)
+	border-color: #bfd3ea
+	color: var(--echo-blue)
+
+.empty-state
+	margin: 0
+	border-radius: 12px
+	border: 1px dashed #c7d5e3
+	background: #f0f6fb
+	padding: .7rem
+	color: var(--echo-text-muted)
+	font-style: italic
+
+.vote-title
+	margin: 0
+	font-size: .72rem
+	font-weight: 700
+	text-transform: uppercase
+	letter-spacing: .05em
+	color: #6f5b1f
+
+.vote-value
+	margin: 0
+	font-size: 2rem
+	line-height: 1
+	font-weight: 800
+	color: var(--echo-blue)
+
+.vote-name
+	margin: 0
+	font-size: .8rem
+	color: var(--echo-text-muted)
+
+.voted-check-icon
+	font-size: 2.4rem
+	color: var(--echo-blue)
+	line-height: 1
+
+.voted-check-label
+	margin: 0
+	font-size: .9rem
+	font-weight: 800
+	color: var(--echo-blue)
+
+@keyframes reveal-single-turn
+	from
+		transform: rotateY(180deg)
+	to
+		transform: rotateY(540deg)
+
+@keyframes next-item-single-turn
+	from
+		transform: rotateY(180deg)
+	to
+		transform: rotateY(360deg)
+
+@media (max-width: 640px)
+	.list
+		grid-template-columns: 1fr
+
+	.tile-front
+		grid-template-columns: auto 1fr
+
+	.badges
+		grid-column: 1 / -1
+		justify-items: start
+		grid-auto-flow: column

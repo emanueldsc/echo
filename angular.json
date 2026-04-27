@@ -29,12 +29,17 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.sass"
-            ]
+            "styles": ["src/material-theme.scss", "src/styles.sass"],
+            "outputPath": "app/browser"
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",

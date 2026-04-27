@@ -1,0 +1,341 @@
+:host
+	display: block
+	min-height: 100dvh
+
+.room-page
+	min-height: 100dvh
+	padding: 1.2rem
+	background: linear-gradient(145deg, var(--echo-bg-green) 0%, var(--echo-bg-yellow) 52%, var(--echo-bg-blue) 100%)
+	display: grid
+	gap: 1rem
+	align-content: start
+
+.room-header
+	display: flex
+	gap: .75rem
+	align-items: center
+	justify-content: space-between
+	padding: .35rem .85rem
+	border-radius: 10px
+	border: 1px solid var(--echo-border)
+	background: #fffffff0
+	line-height: 1
+
+.eyebrow
+	margin: 0
+	color: var(--echo-green)
+	font-weight: 800
+	font-size: .7rem
+	letter-spacing: .1em
+	text-transform: uppercase
+
+.brand-row
+	display: flex
+	align-items: center
+	gap: .55rem
+
+h1
+	margin: 0
+	font-size: .95rem
+	font-weight: 700
+	color: var(--echo-text)
+	line-height: 1
+
+.code
+	color: var(--echo-yellow)
+	letter-spacing: .06em
+
+.status
+	font-size: .75rem
+	font-weight: 700
+	padding: .15rem .45rem
+	border-radius: 999px
+
+.header-actions
+	display: flex
+	align-items: center
+	gap: .45rem
+
+.header-actions button
+	height: auto
+	padding: .2rem .65rem
+	font-size: .82rem
+	display: flex
+	align-items: center
+	gap: .3rem
+
+.header-actions .material-icons
+	font-size: 1rem
+
+.status-waiting
+	color: var(--echo-text-muted)
+
+.status-voting
+	color: var(--echo-green)
+
+.status-revealed
+	color: var(--echo-blue)
+
+.current-user
+	display: flex
+	align-items: center
+	gap: .4rem
+	background: var(--echo-yellow-soft)
+	border: 1px solid #dfc788
+	border-radius: 999px
+	padding: .15rem .5rem .15rem .2rem
+
+.current-user-avatar
+	width: 1.3rem
+	height: 1.3rem
+	border-radius: 50%
+	background: linear-gradient(135deg, #d9eacd 0%, #e4eef9 100%)
+	display: grid
+	place-items: center
+	font-size: .58rem
+	font-weight: 800
+	color: #20314a
+
+.current-user-name
+	font-size: .78rem
+	font-weight: 700
+	color: var(--echo-text)
+	max-width: 10rem
+	overflow: hidden
+	text-overflow: ellipsis
+	white-space: nowrap
+
+.copied-feedback
+	margin: 0
+	color: var(--echo-green)
+	font-size: .9rem
+
+.item-panel
+	display: grid
+	gap: .5rem
+	padding: .65rem 1rem
+	border-radius: 14px
+	border: 1px solid var(--echo-border)
+	background: var(--echo-surface)
+
+.connection-bar
+	display: flex
+	align-items: center
+	gap: .6rem
+
+.item-row
+	display: flex
+	align-items: center
+	gap: .75rem
+
+.item-row .item-form
+	flex: 1
+
+.item-form
+	display: grid
+
+.connection-state
+	margin: 0
+	font-size: .82rem
+	color: var(--echo-green)
+	font-weight: 600
+	padding: .28rem .55rem
+	border-radius: .5rem
+	background: var(--echo-green-soft)
+	border: 1px solid #b9dfc7
+	flex-shrink: 0
+
+.connection-detail
+	color: inherit
+	font-weight: 400
+	font-size: inherit
+
+.connection-warning
+	color: #9a3412
+	background: #fff7ed
+	border-color: #fed7aa
+
+.connection-error
+	color: #b91c1c
+	background: #fef2f2
+	border-color: #fecaca
+
+.connection-actions
+	display: flex
+	justify-content: flex-start
+
+.button.small, button.small
+	font-size: .78rem
+	padding: .22rem .55rem
+	height: auto
+
+.round-meta
+	margin: 0
+	font-size: .9rem
+	color: var(--echo-text-muted)
+	font-weight: 600
+
+.field
+	display: grid
+	gap: .35rem
+
+.field > span
+	color: #25354d
+	font-weight: 600
+
+input
+	height: 2.7rem
+	border: 1px solid var(--echo-border)
+	border-radius: .65rem
+	padding: 0 .75rem
+	font: inherit
+	background: var(--echo-surface)
+	color: var(--echo-text)
+
+input:disabled
+	background: #eef3f6
+	color: #7f95a9
+	cursor: not-allowed
+	border-color: #d7e1eb
+
+input:focus
+	outline: 2px solid var(--echo-blue)
+	outline-offset: 1px
+	border-color: var(--echo-blue)
+
+.round-actions
+	display: flex
+	gap: .55rem
+	flex-wrap: wrap
+
+button
+	border: 0
+	border-radius: .65rem
+	height: 2.55rem
+	padding: 0 .95rem
+	font-weight: 700
+	cursor: pointer
+
+button.primary
+	background: var(--echo-green)
+	color: #edf7f1
+
+button.ghost
+	background: var(--echo-blue-soft)
+	color: var(--echo-text)
+
+button.danger
+	background: #ffe9ea
+	color: var(--echo-danger)
+
+.room-nav
+	display: flex
+	gap: .5rem
+	flex-wrap: wrap
+
+.room-nav a
+	text-decoration: none
+	padding: .45rem .7rem
+	border-radius: 999px
+	background: #eaf0f8
+	color: #213248
+	font-weight: 700
+
+.layout
+	display: grid
+	gap: .9rem
+	grid-template-columns: 1fr
+
+.card
+	border: 1px solid var(--echo-border)
+	border-radius: 14px
+	background: var(--echo-surface)
+	padding: 1rem
+
+.card h2
+	margin: 0 0 .7rem
+	font-size: 1rem
+	color: var(--echo-text)
+
+.history-empty
+	margin: 0
+	font-size: .88rem
+	color: #7f95a9
+	font-style: italic
+
+.history-list
+	margin: 0
+	padding: 0
+	list-style: none
+	display: grid
+	gap: .7rem
+
+.history-item
+	border: 1px solid #d6e0ec
+	border-radius: 10px
+	padding: .6rem .75rem
+	background: var(--echo-surface-soft)
+
+.history-header
+	display: flex
+	align-items: baseline
+	gap: .5rem
+	flex-wrap: wrap
+	margin-bottom: .4rem
+
+.history-round
+	font-size: .72rem
+	font-weight: 800
+	color: #6f5b1f
+	background: var(--echo-yellow-soft)
+	border: 1px solid #e3d3a2
+	border-radius: 999px
+	padding: .1rem .42rem
+
+.history-title
+	font-size: .9rem
+	font-weight: 700
+	color: var(--echo-text)
+	flex: 1
+
+.history-avg
+	font-size: .8rem
+	font-weight: 700
+	color: var(--echo-blue)
+	background: var(--echo-blue-soft)
+	border: 1px solid #bfd3ea
+	border-radius: 999px
+	padding: .1rem .45rem
+
+.history-votes
+	margin: 0
+	padding: 0
+	list-style: none
+	display: flex
+	flex-wrap: wrap
+	gap: .35rem
+
+.history-vote-chip
+	display: flex
+	align-items: center
+	gap: .3rem
+	background: var(--echo-surface)
+	border: 1px solid #d1dce8
+	border-radius: 999px
+	padding: .12rem .55rem
+
+.history-vote-name
+	font-size: .78rem
+	color: var(--echo-text-muted)
+
+.history-vote-val
+	font-size: .8rem
+	font-weight: 800
+	color: var(--echo-blue)
+
+@media (min-width: 980px)
+	.room-page
+		padding: 1.6rem
+
+	.layout
+		grid-template-columns: 1fr 1fr

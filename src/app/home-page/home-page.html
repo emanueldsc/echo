@@ -1,0 +1,48 @@
+<main class="home">
+	<section class="hero">
+		<p class="eyebrow">ECHO</p>
+		<h1><span class="brand">ECHO</span> Planning Poker em tempo real, sem enrolacao.</h1>
+		<p class="subtitle">
+			Crie uma sala, compartilhe o codigo e conduza a estimativa com voto secreto.
+		</p>
+	</section>
+
+	<section class="panel" aria-label="Entrar ou criar sala">
+		<form [formGroup]="form" (ngSubmit)="joinRoom()" novalidate>
+			<label class="field">
+				<span>Seu nome</span>
+				<input type="text" formControlName="name" placeholder="Ex.: Maria" autocomplete="name" />
+			</label>
+
+			<label class="field">
+				<span>Codigo da sala</span>
+				<input
+					type="text"
+					formControlName="roomCode"
+					placeholder="Ex.: A1B2C3"
+					autocomplete="off"
+					maxlength="8"
+				/>
+			</label>
+
+			@if (roomCodeError()) {
+				<p class="error" role="alert">{{ roomCodeError() }}</p>
+			}
+
+			<div class="actions">
+				<button type="button" class="ghost" [disabled]="creatingRoom()" (click)="createRoom()">
+					@if (creatingRoom()) {
+						<span>Criando...</span>
+					} @else {
+						<span>Criar sala</span>
+					}
+				</button>
+				<button type="submit" class="primary" [disabled]="creatingRoom()">Entrar na sala</button>
+			</div>
+
+			@if (formMessage()) {
+				<p class="feedback" role="status">{{ formMessage() }}</p>
+			}
+		</form>
+	</section>
+</main>

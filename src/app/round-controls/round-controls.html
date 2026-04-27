@@ -1,0 +1,37 @@
+<section class="round-controls" aria-label="Controles da rodada">
+	<header class="status-block">
+		<p class="status-line" [class.status-revealed]="status() === 'revealed'">
+			{{ progressLabel() }}
+		</p>
+
+		@if (status() === 'voting' && votesRemaining() > 0) {
+			<p class="hint">Faltam {{ votesRemaining() }} participantes votarem.</p>
+		}
+
+		@if (isModerator() && status() === 'waiting' && !roundTitleReady()) {
+			<p class="hint">Defina um titulo com pelo menos 4 caracteres para iniciar a rodada.</p>
+		}
+
+		@if (!isModerator()) {
+			<p class="hint">Somente o moderador pode controlar a rodada.</p>
+		}
+	</header>
+
+	<div class="actions">
+		<button type="button" class="primary" [disabled]="!canStart()" (click)="startRound.emit()">
+			Iniciar rodada
+		</button>
+
+		<button type="button" class="ghost" [disabled]="!canReveal()" (click)="revealVotes.emit()">
+			Revelar votos
+		</button>
+
+		<button type="button" class="ghost" [disabled]="!canReset()" (click)="resetRound.emit()">
+			Resetar rodada
+		</button>
+
+		<button type="button" class="next" [disabled]="!canNextItem()" (click)="nextItem.emit()">
+			Proximo item
+		</button>
+	</div>
+</section>

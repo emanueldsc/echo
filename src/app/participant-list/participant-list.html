@@ -1,0 +1,77 @@
+<section class="participant-list" aria-label="Participantes da sala">
+	<header class="summary">
+		<p><strong>{{ total() }}</strong> participantes</p>
+		<p><strong>{{ onlineCount() }}</strong> online</p>
+		<p><strong>{{ votedCount() }}</strong> ja votaram</p>
+		@if (missingVotes() > 0) {
+			<p><strong>{{ missingVotes() }}</strong> faltando voto</p>
+		}
+	</header>
+
+	<ul class="list" role="list">
+		@for (participant of list(); track participant.id) {
+			<li
+				class="tile"
+				[class.tile-offline]="!participant.isOnline"
+				[class.tile-me]="currentUserId() === participant.id"
+				[class.tile-back-visible]="participant.hasVoted || shouldRevealVotes()"
+				[class.tile-voted]="participant.hasVoted && !shouldRevealVotes()"
+				[class.tile-reveal-spin]="revealSpinActive() && shouldRevealVotes() && participant.hasVoted"
+				[class.tile-next-item-spin]="nextItemSpinActive() && !shouldRevealVotes() && !participant.hasVoted"
+			>
+				<div class="tile-inner">
+					<div class="tile-face tile-front">
+						<span class="avatar" aria-hidden="true">{{ initials(participant.name) }}</span>
+
+						<div class="meta">
+							<p class="name">
+								{{ participant.name }}
+								@if (currentUserId() === participant.id) {
+									<span class="name-me" aria-label="Você">(Você)</span>
+								}
+							</p>
+							<p class="role" [class.role-moderator]="participant.role === 'moderator'">
+								@if (participant.role === 'moderator') {
+									Moderador
+								} @else {
+									Participante
+								}
+							</p>
+						</div>
+
+						<div class="badges">
+							<span class="badge" [class.badge-online]="participant.isOnline">
+								@if (participant.isOnline) {
+									Online
+								} @else {
+									Offline
+								}
+							</span>
+							<span class="badge" [class.badge-voted]="participant.hasVoted">
+								@if (participant.hasVoted) {
+									Votou
+								} @else {
+									Aguardando
+								}
+							</span>
+						</div>
+					</div>
+
+					<div class="tile-face tile-back">
+						@if (shouldRevealVotes()) {
+							<p class="vote-title">Voto</p>
+							<p class="vote-value">{{ displayedVote(participant.voteValue) }}</p>
+							<p class="vote-name">{{ participant.name }}</p>
+						} @else {
+							<span class="material-icons voted-check-icon" aria-hidden="true">check_circle</span>
+							<p class="voted-check-label">Votou</p>
+							<p class="vote-name">{{ participant.name }}</p>
+						}
+					</div>
+				</div>
+			</li>
+		} @empty {
+			<li class="empty-state" role="listitem">Nenhum participante conectado.</li>
+		}
+	</ul>
+</section>

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.sass"],
+  "sourcesContent": [":host\r\n\tdisplay: block\r\n\r\n.app-shell\r\n\tmin-height: 100dvh\r\n\tpadding-bottom: 3.1rem\r\n\r\n.app-content\r\n\tmin-height: 100dvh\r\n\r\n.app-footer\r\n\tposition: fixed\r\n\tleft: 0\r\n\tright: 0\r\n\tbottom: 0\r\n\tz-index: 1000\r\n\tpadding: .55rem .9rem\r\n\tbackground: linear-gradient(90deg, rgba(47,109,74,.95) 0%, rgba(31,79,135,.92) 56%, rgba(178,135,34,.9) 100%)\r\n\tborder-top: 1px solid rgba(255, 255, 255, .28)\r\n\tbackdrop-filter: blur(6px)\r\n\r\n.app-footer p\r\n\tmargin: 0\r\n\ttext-align: center\r\n\tfont-size: .8rem\r\n\tfont-weight: 600\r\n\tcolor: #f3f9ff\r\n"],
+  "mappings": "AAAA,MACC,QAAA,MAED,CAAA,UACC,WAAA,OACA,eAAA,OAED,CAAA,YACC,WAAA,OAED,CAAA,WACC,SAAA,MACA,KAAA,EACA,MAAA,EACA,OAAA,EACA,QAAA,KAfD,QAgBC,OAAA,MACA,WAAA,gBAAA,KAAA,CAAA,SAAA,CAAA,UAAA,GAAA,CAAA,WACA,WAAA,IAAA,MAAA,KAAA,GAAA,CAAA,GAAA,CAAA,GAAA,CAAA,KACA,wBAAA,KAAA,KAAA,gBAAA,KAAA,KAED,CAXA,WAWA,EArBA,OAsBC,EACA,WAAA,OACA,UAAA,MACA,YAAA,IACA,MAAA",
+  "names": []
+}

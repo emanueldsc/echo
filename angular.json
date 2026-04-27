@@ -29,8 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/material-theme.scss", "src/styles.sass"],
-            "outputPath": "app/browser"
+            "styles": ["src/material-theme.scss", "src/styles.sass"]
           },
           "configurations": {
             "production": {

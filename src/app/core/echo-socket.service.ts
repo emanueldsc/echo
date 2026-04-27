@@ -170,6 +170,8 @@ export class EchoSocketService {
   }
 
   createRoom(payload: CreateRoomPayload): Promise<EchoEventEnvelope<{ room: unknown }>> {
+    // eslint-disable-next-line no-debugger
+    // debugger;
     return this.emitAndWaitForRoomState('room.create', payload, '');
   }
 
